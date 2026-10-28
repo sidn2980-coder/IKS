@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gyaan Shanti – Ancient India & Meditation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6efe6;--card:#fffaf3;--ink:#2d2118;--mut:#7a6a5c;--ac:#e8731a;--ac2:#fbe3cc;--line:#ead9c6;--sh:0 6px 20px rgba(120,70,20,.1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1511;--card:#2a201a;--ink:#f5e9db;--mut:#b9a794;--ac2:#4a2d17;--line:#3d2f25;--sh:0 6px 20px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#1c1511;--card:#2a201a;--ink:#f5e9db;--mut:#b9a794;--ac2:#4a2d17;--line:#3d2f25;--sh:0 6px 20px rgba(0,0,0,.4)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.5 'DM Sans',system-ui,sans-serif;min-height:100vh}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.1}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.app{max-width:520px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:84px}
+.view{display:none;padding:20px 20px 0}.view.on{display:block}
+/* login */
+#login{padding:0;min-height:100vh;background:linear-gradient(180deg,rgba(40,18,6,.25),rgba(30,12,4,.88)),radial-gradient(circle at 50% 38%,#ffb04a 0,#e8731a 30%,#7a2e0c 70%,#2a1007 100%);color:#fff;display:none;flex-direction:column;justify-content:flex-end;padding:28px}
+#login.on{display:flex}
+.sun{position:absolute;top:12%;left:50%;transform:translateX(-50%);width:200px;height:200px}
+.sun svg{width:100%;height:100%}
+#login h1{font-size:46px;margin-bottom:10px}
+#login p{opacity:.85;margin-bottom:22px}
+input{width:100%;padding:14px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:inherit;margin-bottom:10px}
+input::placeholder{color:rgba(255,255,255,.7)}
+.btn{width:100%;padding:15px;border-radius:16px;background:var(--ac);color:#fff;font-weight:700}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.45);margin-top:10px}
+.err{color:#ffd0b0;font-size:13px;min-height:18px;margin-bottom:6px}
+/* common */
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-weight:700;font-size:18px;margin-right:12px}
+.hi{display:flex;align-items:center}.hi small{color:var(--mut);display:block}.hi b{font-size:18px}
+h2{font-size:26px;margin:22px 0 12px}
+.row{display:flex;justify-content:space-between;align-items:baseline}
+.row button{color:var(--ac);font-size:13px;font-weight:500}
+.moods{display:flex;gap:8px;justify-content:space-between}
+.mood{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--mut)}
+.mood i{width:52px;height:52px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:22px;font-style:normal;transition:.2s}
+.mood.sel i{background:var(--ac);border-color:var(--ac);transform:scale(1.1)}
+.mood.sel{color:var(--ink);font-weight:700}
+.tip{background:var(--ac2);border-radius:16px;padding:14px 16px;margin-top:14px;display:none}
+.tip.on{display:block}.tip b{display:block;margin-bottom:2px}
+.tip button{color:var(--ac);font-weight:700;margin-top:6px}
+.hero{height:150px;border-radius:20px;padding:18px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#b6573a,#e8a35c 60%,#f3c98b);display:flex;flex-direction:column;justify-content:flex-end;width:100%;text-align:left;box-shadow:var(--sh)}
+.hero h3{font-size:28px}.hero span{font-size:13px;opacity:.9}
+.play{position:absolute;right:16px;bottom:16px;width:46px;height:46px;border-radius:50%;background:#fff;color:var(--ac);display:grid;place-items:center;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 8px;text-align:center;font-size:13px}
+.cat div{font-size:26px}.cat b{display:block;font-size:14px}.cat small{color:var(--mut)}
+.list{display:flex;flex-direction:column;gap:10px}
+.item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;text-align:left;width:100%}
+.ic{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;font-size:24px;background:var(--ac2);flex:none}
+.item .t{flex:1}.item .t b{display:block}.item .t small{color:var(--mut)}
+.go{width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;color:var(--ac);flex:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:13px}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.sub{color:var(--mut)}.tl{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 14px;margin-bottom:14px}.tl div{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}.tl div:last-child{border:0}.tl b{width:96px;flex:none;color:var(--ac)}
+/* nav */
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:var(--card);border-top:1px solid var(--line);display:none;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+nav.on{display:flex}
+nav button{display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--mut);gap:2px;padding:4px 10px}
+nav button span{font-size:20px}nav button.on{color:var(--ac);font-weight:700}
+/* sheet */
+.sheet{position:fixed;inset:0;background:var(--bg);z-index:10;display:none;overflow:auto;max-width:520px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top,0px)) 22px 40px}
+.sheet.on{display:block}
+.back{width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--line);margin-bottom:14px}
+.sheet h1{font-size:36px;margin-bottom:6px}
+.sheet p{margin:12px 0;max-width:62ch}
+.fact{border-left:3px solid var(--ac);padding:4px 14px;background:var(--ac2);border-radius:0 12px 12px 0;margin:14px 0}
+/* meditation */
+.orb-wrap{display:grid;place-items:center;height:240px}
+.orb{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffd08a,#e8731a 70%);box-shadow:0 0 60px rgba(232,115,26,.5);transition:transform 4s ease-in-out}
+.orb.in{transform:scale(1.45)}
+.bar{height:6px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--ac)}
+.times{display:flex;justify-content:space-between;color:var(--mut);font-size:12px;margin:6px 0 14px}
+.ctl{display:flex;justify-content:center;align-items:center;gap:26px;margin:10px 0}
+.big{width:68px;height:68px;border-radius:50%;background:var(--ac);color:#fff;font-size:24px}
+.vol{width:100%;accent-color:var(--ac)}
+.pill{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.cue{text-align:center;color:var(--mut);height:22px}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stat div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 6px;text-align:center}
+.stat b{font-family:'Cormorant Garamond',serif;font-size:30px;display:block;color:var(--ac)}
+.stat small{color:var(--mut)}
+.link{color:var(--ac);font-weight:700;margin-top:14px;display:block}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<section id="login" class="view on">
+  <div class="sun"><svg viewBox="0 0 200 200" fill="none" stroke="#fff3df" stroke-width="2"><circle cx="100" cy="100" r="22" fill="#fff3df"/><circle cx="100" cy="100" r="42"/><circle cx="100" cy="100" r="62" stroke-dasharray="3 7"/><g><path d="M100 14v22M100 164v22M14 100h22M164 100h22M39 39l15 15M146 146l15 15M161 39l-15 15M54 146l-15 15"/></g></svg></div>
+  <h1>Find peace in ancient wisdom.</h1>
+  <p>Learn India's knowledge traditions — the Vedas, Ayurveda, mathematics and more — and pause each day with guided meditation.</p>
+  <div class="err" id="err" role="alert"></div>
+  <input id="nm" placeholder="Your name" autocomplete="name" aria-label="Your name">
+  <input id="em" type="email" placeholder="Email" autocomplete="email" aria-label="Email">
+  <button class="btn" id="start">Get started</button>
+  <button class="btn ghost" id="have">I already have an account</button>
+</section>
+
+<section id="home" class="view">
+  <div class="top"><div class="hi"><div class="av" id="av1">N</div><div><small id="greet">Good morning,</small><b id="uname">Friend</b> 🙏</div></div></div>
+  <b>How are you feeling today?</b>
+  <div class="moods" id="moods" style="margin-top:12px"></div>
+  <div class="tip" id="tip"><b id="tipT"></b><span id="tipD"></span><br><button id="tipB">Begin →</button></div>
+  <h2>Continue your journey</h2>
+  <button class="hero" data-med="0"><h3>Morning Om</h3><span>10 min · Beginner</span><div class="play">▶</div></button>
+  <div class="row"><h2>Explore</h2><button data-go="explore">See all</button></div>
+  <div class="grid">
+    <button class="cat" data-go="explore" data-f="lesson"><div>📜</div><b>Lessons</b><small>17 topics</small></button>
+    <button class="cat" data-go="explore" data-f="med"><div>🪷</div><b>Meditate</b><small>4 sessions</small></button>
+    <button class="cat" data-go="explore" data-f="hist"><div>🏛️</div><b>History</b><small>10 topics</small></button>
+  </div>
+  <div class="row"><h2>Recommended for you</h2></div>
+  <div class="list" id="rec"></div>
+</section>
+
+<section id="explore" class="view">
+  <h2 style="margin-top:6px;font-size:34px">Explore</h2>
+  <p class="sub" style="margin-bottom:14px">Lessons from India's ancient knowledge systems, and meditations to settle your mind.</p>
+  <div class="chips" id="chips"></div>
+  <div class="list" id="exl"></div>
+</section>
+
+<section id="meditate" class="view">
+  <h2 style="margin-top:6px;font-size:34px">Meditate</h2>
+  <p class="sub" style="margin-bottom:14px">Choose a session. Sound plays while you breathe, with a tabla and harmonium raga underneath.</p>
+  <div class="list" id="medl"></div>
+</section>
+
+<section id="profile" class="view">
+  <div class="top"><div class="hi"><div class="av" id="av2" style="width:64px;height:64px;font-size:26px">N</div><div><b id="pn" style="font-size:22px"></b><small id="pe"></small></div></div></div>
+  <div class="stat"><div><b id="sMin">0</b><small>minutes</small></div><div><b id="sLes">0</b><small>lessons</small></div><div><b id="sStr">0</b><small>day streak</small></div></div>
+  <h2>Mood log</h2>
+  <div class="list" id="mlog"></div>
+  <h2>Settings</h2>
+  <div class="chips"><button class="chip" id="th">Toggle light / dark</button><button class="chip" id="out">Sign out</button></div>
+</section>
+
+<nav id="nav">
+  <button data-go="home" class="on"><span>🏠</span>Home</button>
+  <button data-go="explore"><span>🧭</span>Explore</button>
+  <button data-go="meditate"><span>🪷</span>Meditate</button>
+  <button data-go="profile"><span>👤</span>Profile</button>
+</nav>
+
+<div class="sheet" id="lesson">
+  <button class="back" id="lb" aria-label="Back">←</button>
+  <div class="ic" id="lIc" style="width:64px;height:64px;font-size:32px"></div>
+  <h1 id="lT" style="margin-top:12px"></h1><small class="sub" id="lS"></small>
+  <p id="lP"></p><div class="fact"><b>Did you know?</b><br><span id="lF"></span></div>
+  <button class="btn" id="lDone">Mark as learned</button>
+</div>
+
+<div class="sheet" id="player">
+  <button class="back" id="pb" aria-label="Back">←</button>
+  <h1 id="mT"></h1><small class="sub" id="mS"></small>
+  <div class="orb-wrap"><div class="orb" id="orb"></div></div>
+  <div class="cue" id="cue">Press play to begin</div>
+  <div class="bar" style="margin-top:16px"><i id="fill"></i></div>
+  <div class="times"><span id="cur">00:00</span><span id="tot">10:00</span></div>
+  <div class="ctl"><button class="big" id="pp" aria-label="Play">▶</button></div>
+  <div class="pill" id="snd"></div>
+  <label class="sub" for="vol">Volume</label><input class="vol" id="vol" type="range" min="0" max="1" step="0.05" value="0.6" style="background:none;border:0;padding:0">
+  <p class="sub" id="mD"></p>
+</div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem('iks_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('iks_'+k,JSON.stringify(v))}catch(e){}}};
+let S={user:store.get('user',null),moods:store.get('moods',[]),min:store.get('min',0),les:store.get('les',[]),days:store.get('days',[])};
+const save=()=>{store.set('user',S.user);store.set('moods',S.moods);store.set('min',S.min);store.set('les',S.les);store.set('days',S.days)};
+
+const LESSONS=[
+{e:'📜',t:'The Vedas',s:'Foundations · 6 min',p:'The Vedas are among the oldest texts of humanity, composed in Sanskrit and passed down orally for centuries with precise methods of recitation. The four Vedas — Rig, Yajur, Sama and Atharva — hold hymns, rituals and early philosophical inquiry into nature and the self.',f:'Vedic chanting patterns such as jata and ghana kept the text unchanged across generations without writing.'},
+{e:'🌿',t:'Ayurveda',s:'Health · 5 min',p:'Ayurveda, the "science of life", treats health as balance among body, mind and environment. The Charaka Samhita covers internal medicine, while the Sushruta Samhita is known for surgery and the care of wounds.',f:'Sushruta described procedures like reconstructive nose surgery over two thousand years ago.'},
+{e:'🧘',t:'Yoga & Darshana',s:'Philosophy · 6 min',p:'Patanjali\'s Yoga Sutras set out an eight-limb path from ethical living to meditation and absorption. Yoga is one of six classical schools of Indian philosophy, alongside Nyaya, Vaisheshika, Samkhya, Mimamsa and Vedanta.',f:'The word "yoga" comes from the Sanskrit root "yuj", meaning to join or unite.'},
+{e:'🔢',t:'Mathematics & Zero',s:'Science · 5 min',p:'Indian mathematicians developed the decimal place-value system and treated zero as a number. Aryabhata, Brahmagupta and Bhaskara advanced algebra, trigonometry and astronomy, and the Kerala school came close to calculus ideas centuries before Europe.',f:'Brahmagupta wrote rules for arithmetic with zero and negative numbers in 628 CE.'},
+{e:'🔭',t:'Astronomy',s:'Science · 5 min',p:'Aryabhata proposed that the Earth rotates on its axis and explained eclipses through shadows. Observatories like Jantar Mantar later turned that knowledge into giant stone instruments.',f:'Aryabhata estimated pi as 3.1416 around 499 CE.'},
+{e:'🏺',t:'Indus Valley Civilisation',s:'History · 6 min',p:'Cities like Harappa and Mohenjo-daro, built around 2600 BCE, had planned streets, standard brick sizes, covered drains and public baths. Their script remains undeciphered.',f:'Dholavira featured sophisticated water reservoirs in a dry landscape.'},
+{e:'🛕',t:'Temple Architecture',s:'Art · 5 min',p:'Vastu and Shilpa Shastras guided builders in proportion, orientation and sculpture. Nagara, Dravida and Vesara styles gave rise to monuments from Khajuraho to Brihadeeswara.',f:'The Ellora Kailasa temple was carved top-down from a single rock.'},
+{e:'🔤',t:'Panini & Sanskrit',s:'Language · 4 min',p:'Panini\'s Ashtadhyayi, written about 2,500 years ago, describes Sanskrit grammar in nearly 4,000 compact rules. Its rule-based structure is often compared to a formal system.',f:'Computer scientists have noted its resemblance to modern formal grammars.'},
+{e:'🌾',t:'Vedic Age & Mahajanapadas',s:'History · 5 min',p:'After about 1500 BCE, communities spread across the Ganga plains, moving from tribes toward kingdoms. By roughly 600 BCE there were sixteen great states, the Mahajanapadas, including Kashi, Kosala, Avanti and Magadha. Magadha eventually became the most powerful.',f:'Kashi, today Varanasi, is among the oldest continuously inhabited cities in the world.'},
+{e:'☸️',t:'Buddhism & Jainism',s:'History · 5 min',p:'In the 6th–5th centuries BCE, Mahavira and Gautama Buddha taught paths of non-violence, self-discipline and freedom from suffering. Both questioned ritual authority and spread widely through merchants, monks and royal patronage, later reaching Sri Lanka, Central and East Asia.',f:'Buddha gave his first sermon at Sarnath, near Varanasi.'},
+{e:'🦁',t:'Maurya Empire & Ashoka',s:'History · 6 min',p:'Chandragupta Maurya, advised by Chanakya, founded the first empire to unite most of the subcontinent around 321 BCE. His grandson Ashoka, shaken by the Kalinga war in 261 BCE, turned to dhamma, a policy of compassion and tolerance, and carved edicts on rocks and pillars.',f:'The Lion Capital of Ashoka is India\'s national emblem, and the Ashoka Chakra sits on its flag.'},
+{e:'🌟',t:'The Gupta Age',s:'History · 5 min',p:'From about 320 to 550 CE, Gupta rulers presided over a flowering of Sanskrit literature, art, mathematics and science. Kalidasa wrote poetry and drama, Aryabhata worked on astronomy, and temples and sculpture reached new refinement.',f:'The Iron Pillar in Delhi, about 1,600 years old, has resisted rust remarkably well.'},
+{e:'🎓',t:'Nalanda & Takshashila',s:'History · 5 min',p:'Takshashila and Nalanda were among the world\'s earliest great centres of learning. Nalanda, active from about the 5th century CE, drew thousands of students and scholars from Asia to study logic, medicine, grammar and Buddhist philosophy, and the Chinese monk Xuanzang studied there.',f:'Nalanda\'s library complex was said to rise several storeys and held vast numbers of manuscripts.'},
+{e:'⚓',t:'Cholas & Southern Kingdoms',s:'History · 6 min',p:'The Cholas of Tamil Nadu rose to power under Rajaraja I and Rajendra I around 1000 CE. They built a strong navy, traded across the Indian Ocean, sent expeditions toward Southeast Asia, and raised monuments like the Brihadeeswara Temple, completed in 1010 CE.',f:'Chola bronzes of dancing Nataraja are still admired as masterpieces of metal casting.'},
+{e:'🏰',t:'Delhi Sultanate & Vijayanagara',s:'History · 6 min',p:'The Delhi Sultanate ruled much of north India from 1206 to 1526 and shaped architecture, language and administration. In the south, the Vijayanagara Empire, founded in 1336, built the grand city of Hampi and supported trade, music, literature and temple building.',f:'Hampi\'s markets once traded in horses, spices and gems with merchants from many lands.'},
+{e:'🕌',t:'Mughals & Marathas',s:'History · 7 min',p:'Babur won at Panipat in 1526, beginning the Mughal Empire. Akbar promoted tolerance and dialogue, while Shah Jahan built the Taj Mahal. In the 17th century Shivaji founded Maratha power, was crowned in 1674, and built a formidable navy and fort network.',f:'Akbar\'s policy of sulh-i-kul meant "universal peace" among faiths.'},
+{e:'🇮🇳',t:'The Freedom Struggle',s:'History · 7 min',p:'Resistance to colonial rule included the revolt of 1857, the founding of the Indian National Congress in 1885, and Gandhi\'s non-violent satyagraha. The Salt March of 1930 covered about 240 miles. India became independent on 15 August 1947.',f:'Thousands of people across all regions and backgrounds took part in the movement.'}];
+const TL=[['2600 BCE','Indus cities flourish'],['1500–600 BCE','Vedic age, Mahajanapadas'],['321 BCE','Maurya Empire founded'],['261 BCE','Ashoka and the Kalinga war'],['320 CE','Gupta Empire begins'],['1010 CE','Brihadeeswara Temple completed'],['1206','Delhi Sultanate'],['1336','Vijayanagara Empire'],['1526','Mughal Empire'],['1674','Shivaji crowned'],['1857','Revolt of 1857'],['1947','Independence']];
+const MEDS=[
+{e:'🕉️',t:'Morning Om',s:'10 min · Beginner',m:10,snd:'drone',p:'A gentle meditation to start your day with clarity and positive energy.',mood:['Tired','Happy']},
+{e:'🌙',t:'Deep Sleep',s:'20 min · Sleep',m:20,snd:'bowls',p:'Slow breath and soft bowls to let the day dissolve.',mood:['Tired','Stressed']},
+{e:'🌬️',t:'Pranayama Breath',s:'5 min · Breathing',m:5,snd:'flow',p:'Breathe in and out with the glowing orb to settle a busy mind.',mood:['Anxious','Stressed']},
+{e:'🪷',t:'Calm Mind',s:'8 min · Meditation',m:8,snd:'drone',p:'Rest attention on the sound of a steady tanpura drone.',mood:['Peaceful','Anxious']}];
+const MOODS=[['Peaceful','🍃','Keep the calm going','Try Calm Mind, or learn how Yoga Sutras describe stillness.',3],['Anxious','😟','Let\'s slow things down','A short Pranayama breathing session can help you settle.',2],['Stressed','😣','Take five','Pranayama Breath is a quick reset. Follow the orb.',2],['Tired','😴','Rest or recharge','Morning Om lifts your energy, Deep Sleep helps you wind down.',0],['Happy','😊','Ride the good mood','Feed your curiosity with a lesson on Mathematics & Zero.',-1]];
+const SOUNDS=[['drone','Tanpura drone'],['bowls','Singing bowls'],['flow','Gentle raga']];
+
+/* navigation */
+function show(id){$$('.view').forEach(v=>v.classList.toggle('on',v.id===id));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));$('#nav').classList.toggle('on',id!=='login');scrollTo(0,0);if(id==='profile')renderProfile()}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){if(g.dataset.f){filt=g.dataset.f;renderExplore()}show(g.dataset.go)}const m=e.target.closest('[data-med]');if(m)openMed(+m.dataset.med);const l=e.target.closest('[data-les]');if(l)openLesson(+l.dataset.les)});
+
+/* login */
+function login(isNew){const n=$('#nm').value.trim(),m=$('#em').value.trim();if(!n||!/.+@.+\..+/.test(m)){$('#err').textContent='Enter your name and a valid email to continue.';return}S.user={n,m};save();enter()}
+$('#start').onclick=()=>login(true);$('#have').onclick=()=>login(false);
+function enter(){const n=S.user.n;$('#uname').textContent=n.split(' ')[0];$('#av1').textContent=$('#av2').textContent=n[0].toUpperCase();const h=new Date().getHours();$('#greet').textContent=h<12?'Good morning,':h<17?'Good afternoon,':'Good evening,';show('home')}
+$('#out').onclick=()=>{S.user=null;save();stop();show('login')};
+$('#th').onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).getPropertyValue('--bg').trim()==='#1c1511';r.dataset.theme=d?'light':'dark'};
+
+/* mood */
+const mw=$('#moods');MOODS.forEach((m,i)=>{const b=document.createElement('button');b.className='mood';b.innerHTML=`<i>${m[1]}</i>${m[0]}`;b.onclick=()=>pickMood(i);mw.appendChild(b)});
+let tipTarget=0;
+function pickMood(i){$$('.mood').forEach((b,j)=>b.classList.toggle('sel',i===j));const m=MOODS[i];$('#tipT').textContent=m[2];$('#tipD').textContent=m[3];$('#tip').classList.add('on');tipTarget=m[4];S.moods.unshift({m:m[0],e:m[1],t:Date.now()});S.moods=S.moods.slice(0,20);save()}
+$('#tipB').onclick=()=>tipTarget>=0?openMed(tipTarget):openLesson(3);
+
+/* lists */
+const itemHTML=(ic,t,s,attr)=>`<button class="item" ${attr}><div class="ic">${ic}</div><div class="t"><b>${t}</b><small>${s}</small></div><div class="go">▶</div></button>`;
+$('#rec').innerHTML=itemHTML('🪷','Calm Mind','8 min · Meditation','data-med="3"')+itemHTML('🔢','Mathematics & Zero','Lesson · 5 min','data-les="3"')+itemHTML('🌬️','Pranayama Breath','5 min · Breathing','data-med="2"');
+$('#medl').innerHTML=MEDS.map((m,i)=>itemHTML(m.e,m.t,m.s,`data-med="${i}"`)).join('');
+let filt='all';
+function renderExplore(){const c=[['all','All'],['hist','History'],['lesson','Lessons'],['med','Meditations']];$('#chips').innerHTML=c.map(x=>`<button class="chip ${filt===x[0]?'on':''}" data-c="${x[0]}">${x[1]}</button>`).join('');
+let h='';if(filt==='hist')h+='<div class="tl">'+TL.map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')+'</div>';if(filt!=='med')h+=LESSONS.map((l,i)=>(filt==='hist'&&!l.s.startsWith('History'))?'':itemHTML(l.e,l.t,l.s,`data-les="${i}"`)).join('');if(filt==='all'||filt==='med')h+=MEDS.map((m,i)=>itemHTML(m.e,m.t,m.s,`data-med="${i}"`)).join('');$('#exl').innerHTML=h;
+$$('[data-c]').forEach(b=>b.onclick=()=>{filt=b.dataset.c;renderExplore()})}
+renderExplore();
+
+/* lesson */
+let curL=0;
+function openLesson(i){curL=i;const l=LESSONS[i];$('#lIc').textContent=l.e;$('#lT').textContent=l.t;$('#lS').textContent=l.s;$('#lP').textContent=l.p;$('#lF').textContent=l.f;$('#lDone').textContent=S.les.includes(i)?'Learned ✓':'Mark as learned';$('#lesson').classList.add('on')}
+$('#lb').onclick=()=>$('#lesson').classList.remove('on');
+$('#lDone').onclick=()=>{if(!S.les.includes(curL))S.les.push(curL);save();$('#lDone').textContent='Learned ✓'};
+
+/* profile */
+function renderProfile(){$('#pn').textContent=S.user.n;$('#pe').textContent=S.user.m;$('#sMin').textContent=S.min;$('#sLes').textContent=S.les.length;$('#sStr').textContent=S.days.length;
+$('#mlog').innerHTML=S.moods.length?S.moods.slice(0,5).map(x=>itemHTML(x.e,x.m,new Date(x.t).toLocaleString([], {dateStyle:'medium',timeStyle:'short'}),'').replace('<div class="go">▶</div>','')).join(''):'<p class="sub">No check-ins yet. Pick a mood on Home to start your log.</p>'}
+
+/* audio engine */
+let AC,master,nodes=[],timer=null,bowlT=null,flowT=null,curM=0,sndMode='drone',playing=false,elapsed=0,total=600;
+const ctx=()=>{if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=+$('#vol').value;const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2400;master.connect(lp);lp.connect(AC.destination)}if(AC.state==='suspended')AC.resume();return AC};
+function drone(){const a=ctx(),base=98;[[base,.22],[base*1.5,.14],[base*2,.12],[base*2,.1],[base/2,.2]].forEach(([f,v],i)=>{const o=a.createOscillator(),g=a.createGain(),l=a.createOscillator(),lg=a.createGain();o.type=i%2?'sawtooth':'triangle';o.frequency.value=f;o.detune.value=(i-2)*4;g.gain.value=0;g.gain.linearRampToValueAtTime(v*.5,a.currentTime+3);l.frequency.value=.1+i*.05;lg.gain.value=v*.2;l.connect(lg);lg.connect(g.gain);o.connect(g);g.connect(master);o.start();l.start();nodes.push(o,l,g)})}
+function bowl(f){const a=ctx(),t=a.currentTime,g=a.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.35,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+9);g.connect(master);[1,2.76,5.4].forEach((m,i)=>{const o=a.createOscillator(),og=a.createGain();o.frequency.value=f*m;og.gain.value=[1,.4,.15][i];o.connect(og);og.connect(g);o.start(t);o.stop(t+9.5)})}
+function bowls(){bowl(220);bowlT=setInterval(()=>bowl([196,220,262,294][Math.random()*4|0]),7000)}
+function note(f){const a=ctx(),t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.18,t+.04);g.gain.exponentialRampToValueAtTime(.001,t+3.2);o.connect(g);g.connect(master);o.start(t);o.stop(t+3.3)}
+function flow(){const sc=[196,220,247,294,330,392,440];drone();let i=2;flowT=setInterval(()=>{i=Math.max(0,Math.min(6,i+[-2,-1,-1,1,1,2][Math.random()*6|0]));note(sc[i])},2600)}
+function stopSound(){nodes.forEach(n=>{try{n.stop&&n.stop()}catch(e){}});nodes=[];clearInterval(bowlT);clearInterval(flowT)}
+
+/* constant tabla + harmonium background */
+let bgOn=true,bgNodes=[],bgT=null,bgG=null,beat=0;
+const GS=[196,220,247,277,294,330,370,392,440,494,554];
+const TAAL=['dha','dhin','dhin','dha','dha','dhin','dhin','dha','dha','tin','tin','ta','ta','dhin','dhin','dha'];
+function bayan(t,v){const a=ctx(),o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(62,t+.4);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+.65);o.connect(g);g.connect(bgG);o.start(t);o.stop(t+.7)}
+function dayan(t,v,f){const a=ctx(),g=a.createGain();g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+.4);g.connect(bgG);[1,2.3].forEach((m,i)=>{const o=a.createOscillator(),og=a.createGain();o.frequency.setValueAtTime(f*m*1.04,t);o.frequency.exponentialRampToValueAtTime(f*m,t+.05);og.gain.value=i?.35:1;o.connect(og);og.connect(g);o.start(t);o.stop(t+.45)})}
+function tabla(i,t){const b=TAAL[i],acc=i===0?1.3:1;if(b==='dha'||b==='dhin')bayan(t,.45*acc);dayan(t,(b==='dhin'?.16:.24)*acc,b==='tin'?520:b==='ta'?440:370)}
+function reed(f,t,d){const a=ctx(),g=a.createGain(),lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1600;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.08,t+.15);g.gain.setValueAtTime(.08,t+d);g.gain.linearRampToValueAtTime(0,t+d+.4);[-6,0,6].forEach(c=>{const o=a.createOscillator();o.type='sawtooth';o.frequency.value=f;o.detune.value=c;o.connect(lp);o.start(t);o.stop(t+d+.5)});lp.connect(g);g.connect(bgG)}
+function startBg(){const a=ctx();stopBg();bgG=a.createGain();bgG.gain.setValueAtTime(0,a.currentTime);bgG.gain.linearRampToValueAtTime(.9,a.currentTime+2);bgG.connect(master);
+[98,147,196].forEach(f=>[-7,7].forEach(d=>{const o=a.createOscillator(),g=a.createGain(),lp=a.createBiquadFilter();o.type='sawtooth';o.frequency.value=f;o.detune.value=d;lp.type='lowpass';lp.frequency.value=800;g.gain.value=.045;o.connect(lp);lp.connect(g);g.connect(bgG);o.start();bgNodes.push(o)}));
+beat=0;let n=3;bgT=setInterval(()=>{const t=ctx().currentTime+.05;tabla(beat%16,t);if(beat%2===0){n=Math.max(0,Math.min(10,n+[-2,-1,-1,0,1,1,2][Math.random()*7|0]));reed(GS[n],t,1.4)}beat++},750)}
+function stopBg(){clearInterval(bgT);bgNodes.forEach(o=>{try{o.stop()}catch(e){}});bgNodes=[];if(bgG){try{bgG.disconnect()}catch(e){}bgG=null}}
+$('#vol').oninput=e=>{if(master)master.gain.value=+e.target.value};
+
+/* player */
+const fmt=s=>String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function openMed(i){stop(true);curM=i;const m=MEDS[i];sndMode=m.snd;total=m.m*60;elapsed=0;$('#mT').textContent=m.t;$('#mS').textContent=m.s;$('#mD').textContent=m.p;$('#tot').textContent=fmt(total);$('#cur').textContent='00:00';$('#fill').style.width='0';$('#cue').textContent='Press play to begin';$('#pp').textContent='▶';renderSnd();$('#player').classList.add('on')}
+function renderSnd(){$('#snd').innerHTML=SOUNDS.map(s=>`<button class="chip ${sndMode===s[0]?'on':''}" data-s="${s[0]}">${s[1]}</button>`).join('')+`<button class="chip ${bgOn?'on':''}" id="bgt">🪘 Tabla & harmonium</button>`;$$('[data-s]').forEach(b=>b.onclick=()=>{sndMode=b.dataset.s;renderSnd();if(playing){stopSound();startSound()}});$('#bgt').onclick=()=>{bgOn=!bgOn;renderSnd();if(playing){bgOn?startBg():stopBg()}}}
+function startSound(){sndMode==='drone'?drone():sndMode==='bowls'?bowls():flow()}
+function play(){playing=true;$('#pp').textContent='❚❚';startSound();if(bgOn)startBg();breath();timer=setInterval(()=>{elapsed++;$('#cur').textContent=fmt(elapsed);$('#fill').style.width=(elapsed/total*100)+'%';if(elapsed%8===0)breathCycle();if(elapsed>=total)finish()},1000)}
+let bi=false;
+function breathCycle(){bi=!bi;$('#orb').classList.toggle('in',bi);$('#cue').textContent=bi?'Breathe in…':'Breathe out…'}
+function breath(){bi=false;breathCycle()}
+function pause(){playing=false;clearInterval(timer);stopSound();stopBg();$('#pp').textContent='▶';$('#orb').classList.remove('in');$('#cue').textContent='Paused'}
+function stop(silent){pause();if(elapsed>=30){S.min+=Math.round(elapsed/60);const d=new Date().toDateString();if(!S.days.includes(d))S.days.push(d);save()}elapsed=0;if(!silent)$('#cue').textContent=''}
+function finish(){pause();$('#cue').textContent='Session complete. Namaste 🙏';S.min+=Math.round(total/60);const d=new Date().toDateString();if(!S.days.includes(d))S.days.push(d);save();elapsed=0}
+$('#pp').onclick=()=>playing?pause():play();
+$('#pb').onclick=()=>{stop();$('#player').classList.remove('on')};
+
+if(S.user)enter();
+</script>
+</body>
+</html>
